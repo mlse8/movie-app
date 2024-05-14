@@ -10,13 +10,14 @@ export default function MovieList({ title, movies }) {
         <AliceCarousel
             disableDotsControls
             items={movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard movie={movie} />
             ))}
             responsive={{
-                0: { items: 2 },
+                600: { items: 2 },
                 768: { items: 3 },
                 1024: { items: 4 },
-                1380: { items: 5 },
+                1320: { items: 5 },
+                1400: { items: 6 }
             }}
         />
         </section>

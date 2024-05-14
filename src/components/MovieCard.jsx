@@ -8,8 +8,10 @@ export default function MovieCard({ movie }) {
 
     return (
         <Card
+            key={id}
             sx={{
-                minWidth: 120,
+                minWidth: 230,
+                maxWidth: 280,
                 height: 365,
                 margin: 1,
                 cursor: "pointer",

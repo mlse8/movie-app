@@ -10,13 +10,13 @@ import {
     MenuItem,
     Badge,
     Menu,
-    Popover,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MovieIcon from "@mui/icons-material/Movie";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -60,7 +60,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchAppBar() {
+export default function Header() {
+    const navigate = useNavigate();
+
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -75,14 +77,18 @@ export default function SearchAppBar() {
     };
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, marginBottom: 2 }}>
             <AppBar position="static">
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <Box component="div" sx={{ display: "flex" }}>
                         {isMobile ? (
-                            <IconButton onClick={handleMenuClick}>
-                                <MenuIcon />
-                                <Typography variant="h6" paddingLeft={1}>
+                            <IconButton>
+                                <MenuIcon onClick={handleMenuClick} />
+                                <Typography 
+                                    variant="h6" 
+                                    paddingLeft={1}
+                                    onClick={() => navigate("/")}
+                                >
                                     MovieApp
                                 </Typography>
                             </IconButton>
@@ -90,17 +96,21 @@ export default function SearchAppBar() {
                             <>
                                 <IconButton>
                                     <MovieIcon />
-                                    <Typography variant="h6" paddingLeft={1}>
+                                    <Typography 
+                                        variant="h6" 
+                                        paddingLeft={1}
+                                        onClick={() => navigate("/")}
+                                    >
                                         MovieApp
                                     </Typography>
                                 </IconButton>
-                                <MenuItem onClick={handleMenuClose}>
+                                <MenuItem onClick={() => navigate("/")}>
                                     Inicio
                                 </MenuItem>
-                                <MenuItem onClick={handleMenuClose}>
+                                <MenuItem onClick={() => navigate("/new_movies")}>
                                     Últimos lanzamientos
                                 </MenuItem>
-                                <MenuItem onClick={handleMenuClose}>
+                                <MenuItem onClick={() => navigate("/popular")}>
                                     Populares
                                 </MenuItem>
                                 <MenuItem>
@@ -124,13 +134,13 @@ export default function SearchAppBar() {
                                 horizontal: "right",
                             }}
                         >
-                            <MenuItem onClick={handleMenuClose}>
+                            <MenuItem onClick={() => navigate("/")}>
                                 Inicio
                             </MenuItem>
-                            <MenuItem onClick={handleMenuClose}>
+                            <MenuItem onClick={() => navigate("/new_movies")}>
                                 Últimos lanzamientos
                             </MenuItem>
-                            <MenuItem onClick={handleMenuClose}>
+                            <MenuItem onClick={() => navigate("/popular")}>
                                 Populares
                             </MenuItem>
                             <MenuItem>

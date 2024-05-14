@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import useMovieApi from "../hooks/useMovieApi";
 import MovieList from "../components/MovieList";
-import Navbar from "../components/Navbar";
 
 export default function Home() {
     const { popularMovies, getPopularMovies } = useMovieApi();
@@ -14,7 +13,6 @@ export default function Home() {
 
     return (
         <div>
-            <Navbar/>
             <MovieList title="Películas Populares" movies={popularMovies} />
             <MovieList title="Películas Mejor Puntuadas" movies={topRatedMovies} />
         </div>
