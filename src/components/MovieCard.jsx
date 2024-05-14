@@ -1,10 +1,11 @@
 import React from "react";
 import imageNotFound from "../assets/image-not-found.png";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
-    const { id, title, backdrop_path } = movie;
+    const navigate = useNavigate();
+    const { id, title, poster_path } = movie;
 
     return (
         <Card
@@ -12,7 +13,7 @@ export default function MovieCard({ movie }) {
             sx={{
                 minWidth: 230,
                 maxWidth: 280,
-                height: 365,
+                height: 400,
                 margin: 1,
                 cursor: "pointer",
                 transition: "transform 0.3s ease-in-out",
@@ -20,14 +21,15 @@ export default function MovieCard({ movie }) {
                     transform: "scale(1.05)",
                 },
             }}
+            onClick={() => navigate(`/movie/${id}`)}
         >
             <CardMedia
-                sx={{ height: 255, objectFit: "cover" }}
+                sx={{ height: 300, objectFit: "cover" }}
                 alt="movie-poster"
                 title={title}
                 image={
-                    backdrop_path
-                        ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2/${backdrop_path}`
+                    poster_path
+                        ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2/${poster_path}`
                         : imageNotFound
                 }
             />

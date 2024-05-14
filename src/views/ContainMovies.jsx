@@ -14,7 +14,10 @@ export default function ContainMovies({type}) {
     type === 'popular' ? movies = popularMovies : movies = newMovies;
 
     return (
-        <Container maxWidth="2xl">
+        <Container 
+            maxWidth="2xl"
+            sx={{color: "white"}}
+        >
             <Typography 
                 variant="h2" 
                 align="center" 
@@ -25,9 +28,12 @@ export default function ContainMovies({type}) {
                 {type === 'popular' && 'Películas Populares'}
                 {type === 'new' && 'Últimos Lanzamientos'}
             </Typography>
-            <Grid container columns={{ xs: 2, sm: 8, md: 12 }} >
+            <Grid 
+                container 
+                columns={{ xs: 2, sm: 8, md: 12, xl: 12 }}
+            >
                 {movies.map((movie) => (
-                    <Grid item xs={2} sm={4} md={2}>
+                    <Grid item xs={2} sm={4} md={3} xl={2}>
                         <MovieCard movie={movie} />
                     </Grid>
                 ))}
@@ -35,9 +41,14 @@ export default function ContainMovies({type}) {
             <Pagination 
                 count={totalPages}
                 onChange={handleChange}
-                variant="outlined" 
+                variant="outlined"
+                shape="rounded"
                 color="primary"
-                sx={{ padding: 15, display: 'flex', justifyContent: 'center' }}
+                sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    margin: '4rem 0',
+                }}
             />
         </Container>
     );

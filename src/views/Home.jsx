@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Box } from "@mui/material";
 import useMovieApi from "../hooks/useMovieApi";
 import MovieList from "../components/MovieList";
 
@@ -12,9 +13,9 @@ export default function Home() {
     }, []);
 
     return (
-        <div>
+        <Box>
             <MovieList title="Películas Populares" movies={popularMovies} />
             <MovieList title="Películas Mejor Puntuadas" movies={topRatedMovies} />
-        </div>
+        </Box>
     );
 };

@@ -77,7 +77,7 @@ export default function Header() {
     };
 
     return (
-        <Box sx={{ flexGrow: 1, marginBottom: 2 }}>
+        <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <Box component="div" sx={{ display: "flex" }}>

@@ -10,6 +10,7 @@ export default function useMovieApi() {
     const [newMovies, setNewMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [oneMovie, setOneMovie] = useState({})
 
     async function fetchMovies(url, setState) {
         try {
@@ -36,6 +37,15 @@ export default function useMovieApi() {
         fetchMovies(url, setNewMovies);
     };
 
+    async function getOneMovie(id) {
+        try {
+            const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`);
+            setOneMovie(data);
+        } catch (error) {
+            console.error("Error fetching movie:", error);
+        }
+    };
+
     const handleChange = (event, value) => {
         setPage(value);
     };
@@ -49,6 +59,8 @@ export default function useMovieApi() {
         getNewMovies,
         page,
         totalPages,
-        handleChange
+        handleChange,
+        oneMovie,
+        getOneMovie
     };
 }
