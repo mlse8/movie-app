@@ -22,8 +22,8 @@ export default function MovieList({ title, movies }) {
                     600: { items: 2 },
                     768: { items: 3 },
                     1024: { items: 4 },
-                    1320: { items: 5 },
-                    1400: { items: 6 },
+                    1300: { items: 5 },
+                    1450: { items: 6 },
                 }}
             />
         </Box>
