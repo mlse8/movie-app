@@ -10,7 +10,8 @@ export default function useMovieApi() {
     const [newMovies, setNewMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [oneMovie, setOneMovie] = useState({})
+    const [oneMovie, setOneMovie] = useState({});
+    const [loading, setLoading] = useState(true);
 
     async function fetchMovies(url, setState) {
         try {
@@ -19,6 +20,8 @@ export default function useMovieApi() {
             setTotalPages(data.total_pages);
         } catch (error) {
             console.error("Error fetching movies:", error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -43,6 +46,8 @@ export default function useMovieApi() {
             setOneMovie(data);
         } catch (error) {
             console.error("Error fetching movie:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -51,6 +56,7 @@ export default function useMovieApi() {
     };
 
     return { 
+        loading,
         popularMovies,
         getPopularMovies,
         topRatedMovies,
