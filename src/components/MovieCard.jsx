@@ -1,4 +1,3 @@
-import React from "react";
 import imageNotFound from "../assets/image-not-found.png";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +33,7 @@ export default function MovieCard({ movie }) {
                 }
             />
             <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h3" component="div" fontSize={"1.2rem"} fontWeight={"600"}>
                     {title}
                 </Typography>
             </CardContent>

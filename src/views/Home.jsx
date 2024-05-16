@@ -1,21 +1,22 @@
 import { useEffect } from "react";
-import { Box } from "@mui/material";
 import useMovieApi from "../hooks/useMovieApi";
 import MovieList from "../components/MovieList";
+import Carousel from "../components/Carousel";
 
 export default function Home() {
-    const { popularMovies, getPopularMovies } = useMovieApi();
-    const { topRatedMovies, getTopRatedMovies } = useMovieApi();
+    const { popularMovies, getPopularMovies, topRatedMovies, getTopRatedMovies, newMovies, getNewMovies } = useMovieApi();
 
     useEffect(() => {
         getPopularMovies()
         getTopRatedMovies()
+        getNewMovies()
     }, []);
 
     return (
-        <Box>
+        <>
+            <Carousel movies={newMovies} />
             <MovieList title="Películas Populares" movies={popularMovies} />
             <MovieList title="Películas Mejor Puntuadas" movies={topRatedMovies} />
-        </Box>
+        </>
     );
 };

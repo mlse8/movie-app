@@ -17,6 +17,7 @@ export default function MoviePoster( { movie } ) {
                 backgroundImage: `url(${backgroundImageUrl})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
+                backgroundPosition: "center",
                 minHeight: "90vh",
                 display: "flex",
                 flexDirection: "column",
