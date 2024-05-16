@@ -12,10 +12,11 @@ export default function useMovieApi() {
     const [totalPages, setTotalPages] = useState(1);
     const [oneMovie, setOneMovie] = useState({});
     const [loading, setLoading] = useState(true);
+    const [trailer, setTrailer] = useState({})
 
     async function fetchMovies(url, setState) {
         try {
-            const { data } = await axios.get(url);
+            const { data } = await axios(url);
             setState(data.results);
             setTotalPages(data.total_pages);
         } catch (error) {
@@ -41,15 +42,24 @@ export default function useMovieApi() {
     };
 
     async function getOneMovie(id) {
+        const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`;
+        const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=es-ES`;
+        
         try {
-            const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`);
-            setOneMovie(data);
+            const [movieData, videoData] = await Promise.all([
+                axios(movieUrl),
+                axios(videoUrl)
+            ]);
+    
+            setOneMovie(movieData.data);
+            setTrailer(videoData.data.results);
+            console.log(trailer);
         } catch (error) {
-            console.error("Error fetching movie:", error);
+            console.error("Error fetching movie details:", error);
         } finally {
             setLoading(false);
         }
-    };
+    };    
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -67,6 +77,7 @@ export default function useMovieApi() {
         totalPages,
         handleChange,
         oneMovie,
+        trailer,
         getOneMovie
     };
 }

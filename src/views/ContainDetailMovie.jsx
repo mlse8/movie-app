@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 
 export default function ContainDetailMovie() {
     const { id } = useParams();
-    const { loading, oneMovie, getOneMovie } = useMovieApi();
+    const { loading, oneMovie, trailer, getOneMovie } = useMovieApi();
 
     useEffect(() => {
         getOneMovie(id);
@@ -17,7 +17,7 @@ export default function ContainDetailMovie() {
             {loading ? (
                 <Loading />
             ) : (
-                <MoviePoster movie={oneMovie} />
+                <MoviePoster movie={oneMovie} trailer={trailer} />
             )}
         </>
     );

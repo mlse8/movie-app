@@ -3,9 +3,10 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useState } from "react";
+import MovieTrailer from "./MovieTrailer";
 
-export default function MovieDetail({movie}) {
-    console.log(movie);
+export default function MovieDetail({movie, trailer}) {
     const { genres, poster_path, release_date, overview, title, runtime, vote_average } = movie;
 
     const releaseDate = new Date(release_date);
@@ -29,6 +30,10 @@ export default function MovieDetail({movie}) {
     
         return stars;
     }
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <Box
@@ -72,9 +77,11 @@ export default function MovieDetail({movie}) {
                             marginRight: { xs: "auto", sm: "0" },
                             ":hover": { backgroundColor: "rgba(3,3,3,0.6)" }
                         }}
+                        onClick={handleOpen}
                     >
                         Ver trailer
                     </Button>
+                    {open && <MovieTrailer trailer={trailer} handleClose={handleClose} />}
                 </Box>
                 <Box>
                     <Typography

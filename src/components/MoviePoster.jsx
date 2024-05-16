@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import MovieDetail from "./MovieDetail";
 
-export default function MoviePoster( { movie } ) {
+export default function MoviePoster( { movie, trailer } ) {
 
     const { backdrop_path, poster_path } = movie;
 
@@ -36,7 +36,7 @@ export default function MoviePoster( { movie } ) {
                 },
             }}
         >
-            <MovieDetail movie={movie}/>
+            <MovieDetail movie={movie} trailer={trailer}/>
         </Container>
     );
 }
