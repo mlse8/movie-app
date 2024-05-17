@@ -1,10 +1,19 @@
 import imageNotFound from "../assets/image-not-found.png";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, IconButton } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function MovieCard({ movie }) {
     const navigate = useNavigate();
     const { id, title, poster_path } = movie;
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleFavoriteClick = (e) => {
+        e.stopPropagation();
+        setIsFavorite(!isFavorite);
+    };
 
     return (
         <Card
@@ -13,6 +22,7 @@ export default function MovieCard({ movie }) {
                 minWidth: 230,
                 maxWidth: 280,
                 height: 400,
+                backgroundColor: "#F1F1F1",
                 margin: 1,
                 cursor: "pointer",
                 transition: "transform 0.3s ease-in-out",
@@ -32,10 +42,25 @@ export default function MovieCard({ movie }) {
                         : imageNotFound
                 }
             />
-            <CardContent>
-                <Typography gutterBottom variant="h3" component="div" fontSize={"1.2rem"} fontWeight={"600"}>
+            <CardContent
+                sx={{ display: 'flex' }}
+            >
+                <Typography 
+                    gutterBottom 
+                    variant="h3" 
+                    component="div" 
+                    fontSize={"1.2rem"} 
+                    fontWeight={"600"}
+                    flexGrow={1}
+                >
                     {title}
                 </Typography>
+                <IconButton
+                    onClick={handleFavoriteClick}
+                    sx={{ color: isFavorite ? "red" : "gray" }}
+                >
+                    {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                </IconButton>
             </CardContent>
         </Card>
     );

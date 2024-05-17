@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import {
     AppBar,
@@ -8,15 +8,15 @@ import {
     Typography,
     InputBase,
     MenuItem,
+    Drawer,
     Badge,
-    Menu,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MovieIcon from "@mui/icons-material/Movie";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import NavListDrawer from "./NavListDrawer";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -28,7 +28,7 @@ const Search = styled("div")(({ theme }) => ({
     },
     marginLeft: 0,
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("xs")]: {
         marginLeft: theme.spacing(1),
         width: "auto",
     },
@@ -51,10 +51,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create("width"),
+        [theme.breakpoints.up("xs")]: {
+            width: "7ch",
+            "&:focus": {
+                width: "10ch",
+            },
+        },
+        [theme.breakpoints.up("sm")]: {
+            width: "12ch",
+            "&:focus": {
+                width: "17ch",
+            },
+        },
         [theme.breakpoints.up("md")]: {
             width: "15ch",
             "&:focus": {
-                width: "25ch",
+                width: "20ch",
+            },
+        },
+        [theme.breakpoints.up("lg")]: {
+            width: "27ch",
+            "&:focus": {
+                width: "35ch",
             },
         },
     },
@@ -62,106 +80,96 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleMenuClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
+    const navLinks = [
+        {
+            title: "Inicio",
+            path: "/",
+        },
+        {
+            title: "Ultimos lanzamientos",
+            path: "/new_movies",
+        },
+        {
+            title: "Populares",
+            path: "/popular",
+        },
+        {
+            title: "Favoritos",
+            path: "/",
+        },
+    ];
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Box component="div" sx={{ display: "flex" }}>
-                        {isMobile ? (
-                            <IconButton>
-                                <MenuIcon onClick={handleMenuClick} />
-                                <Typography 
-                                    variant="h6" 
-                                    paddingLeft={1}
-                                    onClick={() => navigate("/")}
-                                >
-                                    MovieApp
-                                </Typography>
-                            </IconButton>
-                        ) : (
-                            <>
-                                <IconButton>
-                                    <MovieIcon />
-                                    <Typography 
-                                        variant="h6" 
-                                        paddingLeft={1}
-                                        onClick={() => navigate("/")}
-                                    >
-                                        MovieApp
-                                    </Typography>
-                                </IconButton>
-                                <MenuItem onClick={() => navigate("/")}>
-                                    Inicio
-                                </MenuItem>
-                                <MenuItem onClick={() => navigate("/new_movies")}>
-                                    Últimos lanzamientos
-                                </MenuItem>
-                                <MenuItem onClick={() => navigate("/popular")}>
-                                    Populares
-                                </MenuItem>
-                                <MenuItem>
-                                    Favoritos
-                                    <Badge badgeContent={4} color="error">
-                                        <FavoriteIcon />
-                                    </Badge>
-                                </MenuItem>
-                            </>
-                        )}
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleMenuClose}
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "right",
-                            }}
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
+        <AppBar position="static" sx={{ backgroundColor: "#0F0F0F" }}>
+            <Toolbar sx={{ justifyContent: "space-between" }}>
+                <Box display={"flex"} alignItems={"center"}>
+                    <IconButton
+                        color="inherit"
+                        size="large"
+                        onClick={() => setOpen(true)}
+                        sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <IconButton
+                        color="inherit"
+                        size="large"
+                        sx={{ display: { xs: "none", sm: "none", md: "flex" } }}
+                    >
+                        <MovieIcon />
+                    </IconButton>
+                    <Typography
+                        variant="h1"
+                        fontSize={20}
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => navigate("/")}
+                    >
+                        MovieApp
+                    </Typography>
+                </Box>
+                <Search>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        placeholder="Buscar…"
+                        inputProps={{ "aria-label": "search" }}
+                    />
+                </Search>
+                <Box display={{ xs: "none", sm: "none", md: "flex" }}>
+                    {navLinks.map((item) => (
+                        <MenuItem
+                            key={item.title}
+                            sx={{ ":hover": { backgroundColor: "#222" } }}
+                            onClick={() => navigate(item.path)}
                         >
-                            <MenuItem onClick={() => navigate("/")}>
-                                Inicio
-                            </MenuItem>
-                            <MenuItem onClick={() => navigate("/new_movies")}>
-                                Últimos lanzamientos
-                            </MenuItem>
-                            <MenuItem onClick={() => navigate("/popular")}>
-                                Populares
-                            </MenuItem>
-                            <MenuItem>
-                                Favoritos
-                                <Badge badgeContent={4} color="error">
-                                    <FavoriteIcon />
-                                </Badge>
-                            </MenuItem>
-                        </Menu>
-                    </Box>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Buscar…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
-                </Toolbar>
-            </AppBar>
-        </Box>
+                            {item.title === "Favoritos" ? (
+                                <Box display="flex" alignItems="center">
+                                    {item.title}
+                                    <Badge
+                                        badgeContent={4}
+                                        color="error"
+                                        sx={{ marginLeft: 0.5 }}
+                                    >
+                                        <FavoriteIcon color="inherit" />
+                                    </Badge>
+                                </Box>
+                            ) : (
+                                item.title
+                            )}
+                        </MenuItem>
+                    ))}
+                </Box>
+                <Drawer
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
+                >
+                    <NavListDrawer navLinks={navLinks} />
+                </Drawer>
+            </Toolbar>
+        </AppBar>
     );
 }

@@ -14,6 +14,7 @@ export default function MovieList({ title, movies }) {
                 {title}
             </Typography>
             <AliceCarousel
+                infinite
                 disableDotsControls
                 items={movies.map((movie) => (
                     <MovieCard movie={movie} />

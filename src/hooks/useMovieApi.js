@@ -53,7 +53,6 @@ export default function useMovieApi() {
     
             setOneMovie(movieData.data);
             setTrailer(videoData.data.results);
-            console.log(trailer);
         } catch (error) {
             console.error("Error fetching movie details:", error);
         } finally {

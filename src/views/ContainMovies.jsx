@@ -41,7 +41,7 @@ export default function ContainMovies({ type }) {
                     </Typography>
                     <Grid container columns={{ xs: 2, sm: 8, md: 12, xl: 12 }}>
                         {movies.map((movie) => (
-                            <Grid item xs={2} sm={4} md={3} xl={2}>
+                            <Grid key={movie.id} item xs={2} sm={4} md={3} xl={2}>
                                 <MovieCard movie={movie} />
                             </Grid>
                         ))}

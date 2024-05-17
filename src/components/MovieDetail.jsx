@@ -19,13 +19,13 @@ export default function MovieDetail({movie, trailer}) {
     
         const stars = [];
         for (let i = 0; i < fullStars; i++) {
-            stars.push(<StarIcon />);
+            stars.push(<StarIcon key={crypto.randomUUID()} />);
         }
         if (halfStar) {
-            stars.push(<StarHalfIcon />);
+            stars.push(<StarHalfIcon key={crypto.randomUUID()} />);
         }
         for (let i = 0; i < emptyStars; i++) {
-            stars.push(<StarBorderIcon />);
+            stars.push(<StarBorderIcon key={crypto.randomUUID()} />);
         }
     
         return stars;
