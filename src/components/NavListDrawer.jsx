@@ -14,20 +14,19 @@ export default function NavListDrawer({ navLinks }) {
                 <List>
                     {navLinks.map((item) => (
                         <ListItem disablePadding key={item.title}>
-                            <ListItemButton onClick={() => navigate(item.path)}>
-                                {item.title === "Favoritos" ? (
-                                    <Box display="flex" alignItems="center">
-                                        {item.title}
-                                        <Badge
-                                            badgeContent={4}
-                                            color="error"
-                                            sx={{ marginLeft: 0.5 }}
-                                        >
-                                            <FavoriteIcon color="inherit" />
-                                        </Badge>
-                                    </Box>
-                                ) : (
-                                    item.title
+                            <ListItemButton 
+                                sx={{ ":hover": { backgroundColor: "#222" } }} 
+                                onClick={() => navigate(item.path)}
+                            >
+                                {item.title}
+                                {item.badgeContent !== undefined && (
+                                    <Badge
+                                        badgeContent={item.badgeContent}
+                                        color="error"
+                                        sx={{ marginLeft: 0.5 }}
+                                    >
+                                        <FavoriteIcon color="inherit" />
+                                    </Badge>
                                 )}
                             </ListItemButton>
                         </ListItem>

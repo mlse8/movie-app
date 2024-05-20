@@ -1,16 +1,21 @@
-import { Box, Typography, Button, List, ListItem } from "@mui/material";
+import { Box, Typography, Button, List, ListItem, IconButton } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { useState } from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useState, useContext } from "react";
 import MovieTrailer from "./MovieTrailer";
+import { FavoriteContext } from "../context/FavoriteContext";
 
 export default function MovieDetail({movie, trailer}) {
     const { genres, poster_path, release_date, overview, title, runtime, vote_average } = movie;
 
     const releaseDate = new Date(release_date);
     const year = releaseDate.getFullYear();
+
+    const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
 
     const renderStarRating = (rating) => {
         const fullStars = Math.floor(rating / 2);
@@ -34,6 +39,10 @@ export default function MovieDetail({movie, trailer}) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleFavoriteClick = () => {
+        isFavorite(movie.id) ? removeFavorite(movie.id) : addFavorite(movie)
+    };
 
     return (
         <Box
@@ -59,13 +68,18 @@ export default function MovieDetail({movie, trailer}) {
                     sx={{ flexDirection: { xs: "column", sm: "row" } }}
                 >
                     <Box marginBottom={1}>
-                        <Typography
-                            variant="h3"
-                            fontWeight={"600"}
-                            fontSize={"2rem"}
-                        >
-                            {title}
-                        </Typography>
+                        <Box display={"flex"}>
+                            <Typography
+                                variant="h3"
+                                fontWeight={"600"}
+                                fontSize={"2rem"}
+                            >
+                                {title}
+                            </Typography>
+                            <IconButton onClick={handleFavoriteClick} sx={{ color: "white" }}>
+                                {isFavorite(movie.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                            </IconButton>
+                        </Box>
                         <Typography variant="body1">{year}</Typography>
                     </Box>
                     <Button

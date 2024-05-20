@@ -1,18 +1,31 @@
 import imageNotFound from "../assets/image-not-found.png";
-import { Card, CardContent, CardMedia, Typography, IconButton } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    CardActions,
+    Typography,
+    IconButton,
+} from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
+import { FavoriteContext } from "../context/FavoriteContext";
 
 export default function MovieCard({ movie }) {
     const navigate = useNavigate();
     const { id, title, poster_path } = movie;
-    const [isFavorite, setIsFavorite] = useState(false);
+
+    const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
 
     const handleFavoriteClick = (e) => {
         e.stopPropagation();
-        setIsFavorite(!isFavorite);
+        if (isFavorite(movie.id)) {
+            removeFavorite(movie.id);
+        } else {
+            addFavorite(movie);
+        }
     };
 
     return (
@@ -42,25 +55,25 @@ export default function MovieCard({ movie }) {
                         : imageNotFound
                 }
             />
-            <CardContent
-                sx={{ display: 'flex' }}
-            >
-                <Typography 
-                    gutterBottom 
-                    variant="h3" 
-                    component="div" 
-                    fontSize={"1.2rem"} 
+            <CardContent sx={{ display: "flex" }}>
+                <Typography
+                    gutterBottom
+                    variant="h3"
+                    component="div"
+                    fontSize={"1.2rem"}
                     fontWeight={"600"}
                     flexGrow={1}
                 >
                     {title}
                 </Typography>
-                <IconButton
-                    onClick={handleFavoriteClick}
-                    sx={{ color: isFavorite ? "red" : "gray" }}
-                >
-                    {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </IconButton>
+                <CardActions>
+                    <IconButton
+                        onClick={handleFavoriteClick}
+                        sx={{ color: isFavorite(movie.id) ? "red" : "gray" }}
+                    >
+                        {isFavorite(movie.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    </IconButton>
+                </CardActions>
             </CardContent>
         </Card>
     );

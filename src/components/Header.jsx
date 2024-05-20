@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import {
     AppBar,
@@ -17,6 +17,7 @@ import MovieIcon from "@mui/icons-material/Movie";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import NavListDrawer from "./NavListDrawer";
+import { FavoriteContext } from "../context/FavoriteContext";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -81,6 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const { totalFavorites } = useContext(FavoriteContext);
 
     const navLinks = [
         {
@@ -97,7 +99,8 @@ export default function Header() {
         },
         {
             title: "Favoritos",
-            path: "/",
+            path: "/favorites",
+            badgeContent: totalFavorites(),
         },
     ];
 
@@ -145,19 +148,15 @@ export default function Header() {
                             sx={{ ":hover": { backgroundColor: "#222" } }}
                             onClick={() => navigate(item.path)}
                         >
-                            {item.title === "Favoritos" ? (
-                                <Box display="flex" alignItems="center">
-                                    {item.title}
-                                    <Badge
-                                        badgeContent={4}
-                                        color="error"
-                                        sx={{ marginLeft: 0.5 }}
-                                    >
-                                        <FavoriteIcon color="inherit" />
-                                    </Badge>
-                                </Box>
-                            ) : (
-                                item.title
+                            {item.title}
+                            {item.badgeContent !== undefined && (
+                                <Badge
+                                    badgeContent={item.badgeContent}
+                                    color="error"
+                                    sx={{ marginLeft: 0.5 }}
+                                >
+                                    <FavoriteIcon color="inherit" />
+                                </Badge>
                             )}
                         </MenuItem>
                     ))}
