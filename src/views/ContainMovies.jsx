@@ -39,14 +39,15 @@ export default function ContainMovies({ type }) {
                         {type === "popular" && "Películas Populares"}
                         {type === "new" && "Últimos Lanzamientos"}
                     </Typography>
-                    <Grid container columns={{ xs: 2, sm: 8, md: 12, xl: 12 }}>
+                    <Grid container columns={{ xs: 2, sm: 8, md: 10, xl: 12 }}>
                         {movies.map((movie) => (
-                            <Grid key={movie.id} item xs={2} sm={4} md={3} xl={2}>
+                            <Grid key={movie.id} item xs={2} sm={4} md={2} xl={2}>
                                 <MovieCard movie={movie} />
                             </Grid>
                         ))}
                     </Grid>
                     <Pagination
+                        page={page}
                         count={totalPages}
                         onChange={handleChange}
                         variant="outlined"

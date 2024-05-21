@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home, ContainMovies, ContainDetailMovie, Favorite, NotFound } from "./views";
+import { Home, ContainMovies, ContainDetailMovie, Favorite, SearchResults, NotFound } from "./views";
 import Header from "./components/Header";
 import FavoriteContextProvider from "./context/FavoriteContext.jsx";
 
@@ -15,6 +15,7 @@ export default function App() {
                         <Route path="/popular" element={<ContainMovies type="popular" />} />
                         <Route path="/movie/:id" element={<ContainDetailMovie />} />
                         <Route path="/favorites" element={<Favorite />} />
+                        <Route path="/search" element={<SearchResults />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </FavoriteContextProvider>

@@ -21,14 +21,14 @@ export default function Favorite() {
                 Tus Favoritos
             </Typography>
             {allFavorites && allFavorites.length > 0 ? (
-                <Grid container spacing={2} columns={{ xs: 2, sm: 8, md: 12, xl: 12 }}>
+                <Grid container spacing={2} columns={{ xs: 2, sm: 8, md: 10, xl: 12 }}>
                     {allFavorites.map((favorite) => (
                         <Grid
                             key={favorite.id}
                             item
                             xs={2}
                             sm={4}
-                            md={3}
+                            md={2}
                             xl={2}
                         >
                             <MovieCard movie={favorite} />

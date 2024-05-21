@@ -50,14 +50,14 @@ export default function MovieDetail({movie, trailer}) {
             display={"flex"}
             flexWrap={"wrap"}
             justifyContent={"center"}
-            gap={10}
+            gap={2}
             zIndex={2}
             sx={{ padding: "2rem 1rem" }}
         >
             <Box maxWidth="sm">
                 <img
                     src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2/${poster_path}`}
-                    width={"100%"}
+                    width={"80%"}
                 />
             </Box>
             <Box maxWidth="sm" color={"white"}>

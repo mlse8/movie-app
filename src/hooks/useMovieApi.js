@@ -8,6 +8,7 @@ export default function useMovieApi() {
     const [popularMovies, setPopularMovies] = useState([]);
     const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [newMovies, setNewMovies] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [oneMovie, setOneMovie] = useState({});
@@ -60,6 +61,11 @@ export default function useMovieApi() {
         }
     };    
 
+    async function searchMovies(query, page=1) {
+        const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&api_key=${API_KEY}&language=es-ES&&page=${page}`;
+        fetchMovies(url, setSearchResults);
+    };
+
     const handleChange = (event, value) => {
         setPage(value);
     };
@@ -72,6 +78,8 @@ export default function useMovieApi() {
         getTopRatedMovies,
         newMovies,
         getNewMovies,
+        searchResults,
+        searchMovies,
         page,
         totalPages,
         handleChange,

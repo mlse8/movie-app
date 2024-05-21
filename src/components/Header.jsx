@@ -83,6 +83,14 @@ export default function Header() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const { totalFavorites } = useContext(FavoriteContext);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+        if (e.target.value) {
+            navigate(`/search?query=${e.target.value}`);
+        }
+    }
 
     const navLinks = [
         {
@@ -139,6 +147,8 @@ export default function Header() {
                     <StyledInputBase
                         placeholder="Buscar…"
                         inputProps={{ "aria-label": "search" }}
+                        value={searchQuery}
+                        onChange={handleSearchChange}
                     />
                 </Search>
                 <Box display={{ xs: "none", sm: "none", md: "flex" }}>
