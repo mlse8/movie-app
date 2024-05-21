@@ -60,7 +60,7 @@ export default function MovieDetail({movie, trailer}) {
                     width={"100%"}
                 />
             </Box>
-            <Box maxWidth="md" color={"white"}>
+            <Box maxWidth="sm" color={"white"}>
                 <Box
                     display={"flex"}
                     justifyContent={"space-between"}
