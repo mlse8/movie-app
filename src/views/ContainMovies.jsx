@@ -1,10 +1,13 @@
-import { Container, Grid, Typography, Pagination } from "@mui/material";
-import MovieCard from "../components/MovieCard";
+import { Container, Typography } from "@mui/material";
+import MovieCatalog from "../components/MovieCatalog";
 import Loading from "../components/Loading";
 import { useEffect } from "react";
 import useMovieApi from "../hooks/useMovieApi";
+import { useLocation } from "react-router-dom";
 
 export default function ContainMovies({ type }) {
+    const location = useLocation();
+
     const {
         loading,
         popularMovies,
@@ -19,6 +22,10 @@ export default function ContainMovies({ type }) {
     useEffect(() => {
         type === "popular" ? getPopularMovies() : getNewMovies();
     }, [type, page]);
+
+    useEffect(() => {
+        handleChange(null, 1);
+    }, [location]);
 
     let movies = [];
     type === "popular" ? (movies = popularMovies) : (movies = newMovies);
@@ -39,26 +46,7 @@ export default function ContainMovies({ type }) {
                         {type === "popular" && "Películas Populares"}
                         {type === "new" && "Últimos Lanzamientos"}
                     </Typography>
-                    <Grid container columns={{ xs: 2, sm: 8, md: 10, xl: 12 }}>
-                        {movies.map((movie) => (
-                            <Grid key={movie.id} item xs={2} sm={4} md={2} xl={2}>
-                                <MovieCard movie={movie} />
-                            </Grid>
-                        ))}
-                    </Grid>
-                    <Pagination
-                        page={page}
-                        count={totalPages}
-                        onChange={handleChange}
-                        variant="outlined"
-                        shape="rounded"
-                        color="primary"
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            margin: "4rem 0",
-                        }}
-                    />
+                    <MovieCatalog movies={movies} page={page} totalPages={totalPages} handleChange={handleChange} />
                 </Container>
             )}
         </>

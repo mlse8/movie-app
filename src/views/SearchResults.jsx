@@ -1,5 +1,5 @@
-import { Container, Grid, Typography, Pagination } from "@mui/material";
-import MovieCard from "../components/MovieCard";
+import { Container, Typography } from "@mui/material";
+import MovieCatalog from "../components/MovieCatalog";
 import Loading from "../components/Loading";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ export default function SearchResults() {
 
     useEffect(() => {
         if (currentQuery !== query) {
+            handleChange(null, 1);
             setCurrentQuery(query);
-            handleChange(null,1)
         }
         if (query) {
             searchMovies(query, page);
@@ -39,32 +39,13 @@ export default function SearchResults() {
             ) : (
                 <>
                     {searchResults && searchResults.length > 0 ? (
-                        <>
-                            <Grid container columns={{ xs: 2, sm: 8, md: 10, xl: 12 }}>
-                                {searchResults.map((movie) => (
-                                    <Grid key={movie.id} item xs={2} sm={4} md={2} xl={2}>
-                                        <MovieCard movie={movie} />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                            <Pagination
-                                page={page}
-                                count={totalPages}
-                                onChange={handleChange}
-                                variant="outlined"
-                                shape="rounded"
-                                color="primary"
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    margin: "4rem 0",
-                                }}
-                            />
-                        </>
+                        <MovieCatalog movies={searchResults} page={page} totalPages={totalPages} handleChange={handleChange} />
                     ) : (
                         <Typography
                             variant="h5"
                             fontSize={{ xs: "1rem", md: "1.3rem" }}
+                            textAlign={"center"}
+                            marginTop={4}
                         >
                             No se encontraron resultados para tu búsqueda
                         </Typography>

@@ -34,7 +34,7 @@ export default function MovieCard({ movie }) {
             sx={{
                 minWidth: 230,
                 maxWidth: 280,
-                height: 400,
+                height: 380,
                 backgroundColor: "#F1F1F1",
                 margin: 1,
                 cursor: "pointer",
@@ -60,7 +60,7 @@ export default function MovieCard({ movie }) {
                     gutterBottom
                     variant="h3"
                     component="div"
-                    fontSize={"1.2rem"}
+                    fontSize={"1rem"}
                     fontWeight={"600"}
                     flexGrow={1}
                 >
