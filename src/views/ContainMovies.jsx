@@ -35,11 +35,11 @@ export default function ContainMovies({ type }) {
             {loading ? (
                 <Loading />
             ) : (
-                <Container maxWidth="2xl" sx={{ color: "white" }}>
+                <Container maxWidth="xl" sx={{ color: "white", padding: 0 }}>
                     <Typography
                         variant="h2"
                         align="center"
-                        fontSize={"2rem"}
+                        fontSize={{xs: "1.3rem", lg: "1.8rem"}}
                         fontWeight={500}
                         padding={2}
                     >

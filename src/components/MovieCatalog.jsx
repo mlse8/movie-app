@@ -4,9 +4,9 @@ import MovieCard from "../components/MovieCard";
 export default function MovieCatalog({movies, page, totalPages, handleChange}) {
     return (
         <>
-            <Grid container columns={{ xs: 2, sm: 8, md: 10, lg:10, xl: 12 }}>
+            <Grid container columns={{ xs: 4, sm: 12, md: 10, lg:12, xl: 7 }}>
                 {movies.map((movie) => (
-                    <Grid key={movie.id} item xs={2} sm={4} md={3} lg={2} xl={2}>
+                    <Grid key={movie.id} item xs={2} sm={4} md={2} lg={2} xl={1}>
                         <MovieCard movie={movie} />
                     </Grid>
                 ))}

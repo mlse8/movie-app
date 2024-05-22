@@ -113,7 +113,7 @@ export default function Header() {
     ];
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: "#0F0F0F" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#0F0F0F", maxWidth: "xl", margin: "auto" }}>
             <Toolbar sx={{ justifyContent: "space-between" }}>
                 <Box display={"flex"} alignItems={"center"}>
                     <IconButton

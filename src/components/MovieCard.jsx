@@ -32,9 +32,8 @@ export default function MovieCard({ movie }) {
         <Card
             key={id}
             sx={{
-                minWidth: 230,
-                maxWidth: 280,
-                height: 380,
+                maxWidth: 200,
+                height: { xs: 280, lg: 340 },
                 backgroundColor: "#F1F1F1",
                 margin: 1,
                 cursor: "pointer",
@@ -46,7 +45,7 @@ export default function MovieCard({ movie }) {
             onClick={() => navigate(`/movie/${id}`)}
         >
             <CardMedia
-                sx={{ height: 300, objectFit: "cover" }}
+                sx={{ height: { xs: 200, lg: 260 }, objectFit: "cover" }}
                 alt="movie-poster"
                 title={title}
                 image={
@@ -55,18 +54,25 @@ export default function MovieCard({ movie }) {
                         : imageNotFound
                 }
             />
-            <CardContent sx={{ display: "flex" }}>
+            <CardContent 
+                sx={{ 
+                    display: "flex", 
+                    padding: ".8rem", 
+                    justifyContent: "center", 
+                    alignItems: "center" 
+                }}
+            >
                 <Typography
                     gutterBottom
                     variant="h3"
                     component="div"
-                    fontSize={"1rem"}
+                    fontSize={{xs: ".85rem", lg: ".9rem"}}
                     fontWeight={"600"}
                     flexGrow={1}
                 >
                     {title}
                 </Typography>
-                <CardActions>
+                <CardActions sx={{padding: 0}}>
                     <IconButton
                         onClick={handleFavoriteClick}
                         sx={{ color: isFavorite(movie.id) ? "red" : "gray" }}

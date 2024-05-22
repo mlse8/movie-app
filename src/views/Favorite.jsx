@@ -10,18 +10,18 @@ export default function Favorite() {
     const { allFavorites } = useContext(FavoriteContext);
 
     return (
-        <Container maxWidth="2xl" sx={{ color: "white" }}>
+        <Container maxWidth="xl" sx={{ color: "white" }}>
             <Typography
                 variant="h2"
                 align="center"
-                fontSize={"2rem"}
+                fontSize={{xs: "1.3rem", lg: "1.8rem"}}
                 fontWeight={500}
                 padding={2}
             >
                 Tus Favoritos
             </Typography>
             {allFavorites && allFavorites.length > 0 ? (
-                <Grid container spacing={2} columns={{ xs: 2, sm: 8, md: 10, xl: 12 }}>
+                <Grid container columns={{ xs: 4, sm: 12, md: 10, lg:12, xl: 7 }}>
                     {allFavorites.map((favorite) => (
                         <Grid
                             key={favorite.id}
@@ -29,7 +29,8 @@ export default function Favorite() {
                             xs={2}
                             sm={4}
                             md={2}
-                            xl={2}
+                            lg={2}
+                            xl={1}
                         >
                             <MovieCard movie={favorite} />
                         </Grid>

@@ -19,7 +19,8 @@ export default function CarouselItem({movie}) {
                 alignContent={"center"}
             sx={{
                 backgroundImage: `url(${backgroundImageUrl})`, 
-                backgroundSize: "cover"
+                backgroundSize: "cover",
+                backgroundPosition: "center"
             }}
         >
             <Box 
@@ -36,14 +37,14 @@ export default function CarouselItem({movie}) {
             >
                 <Typography 
                     variant="h3"
-                    fontSize={"1.5rem"} 
+                    fontSize={{ xs: "1rem", md: "1.2rem", lg: "1.4rem"}} 
                     fontWeight={"600"}
                     textAlign={"center"}
                     marginBottom={1}
                 >
                     {title}
                 </Typography>
-                <Typography variant="body2">{overview}</Typography>
+                <Typography variant="body2" fontSize={{ xs: ".8rem", md: ".9rem" }} >{overview}</Typography>
                 
             </Box>
         </Box>
