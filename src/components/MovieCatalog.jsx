@@ -26,7 +26,7 @@ export default function MovieCatalog({movies, page, totalPages, handleChange}) {
                         borderColor: "white",
                     },
                     "& .Mui-selected": {
-                        backgroundColor: "white",
+                        backgroundColor: "whitesmoke",
                         color: "black",
                     },
                 }}
