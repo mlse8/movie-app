@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const FavoriteContext = createContext();
 
 export default function FavoriteContextProvider({ children }) {
-    const [allFavorites, setAllFavorites] = useState(null); // Estado para almacenar la lista de favoritos
+    const [allFavorites, setAllFavorites] = useState([]); // Estado para almacenar la lista de favoritos
 
     /* MONTAJE */
     useEffect(() => {
