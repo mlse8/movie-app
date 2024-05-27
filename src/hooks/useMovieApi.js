@@ -1,9 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 
-// Clave de la API de TMDB
-const API_KEY = "ba08b7822ed6e0c06f2d40d3760b2788";
-
 export default function useMovieApi() {
      // Estados para almacenar diferentes categorías de películas y datos relacionados
     const [popularMovies, setPopularMovies] = useState([]);
@@ -31,26 +28,26 @@ export default function useMovieApi() {
 
     // Obtiene películas populares
     async function getPopularMovies() {
-        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${page}`;
+        const url = `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&language=es-ES&page=${page}`;
         fetchMovies(url, setPopularMovies);
     };
 
     // Obtiene películas mejor puntuadas
     async function getTopRatedMovies() {
-        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=es-ES&page=${page}`;
+        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_API_KEY}&language=es-ES&page=${page}`;
         fetchMovies(url, setTopRatedMovies);
     };
 
     // Obtiene películas nuevas
     async function getNewMovies() {
-        const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=es-ES&page=${page}`;
+        const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_API_KEY}&language=es-ES&page=${page}`;
         fetchMovies(url, setNewMovies);
     };
 
     // Obtiene detalles de una película específica y su tráiler
     async function getOneMovie(id) {
-        const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`;
-        const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=es-ES`;
+        const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}&language=es-ES`;
+        const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=es-ES`;
         
         try {
             const [movieData, videoData] = await Promise.all([
@@ -69,7 +66,7 @@ export default function useMovieApi() {
 
     // Busca películas por una query
     async function searchMovies(query, page=1) {
-        const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&api_key=${API_KEY}&language=es-ES&&page=${page}`;
+        const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&api_key=${import.meta.env.VITE_API_KEY}&language=es-ES&&page=${page}`;
         fetchMovies(url, setSearchResults);
     };
 

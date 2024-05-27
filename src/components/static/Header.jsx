@@ -92,6 +92,9 @@ export default function Header() {
         if (e.target.value) {
             navigate(`/search?query=${e.target.value}`); // Navega a la página de resultados de búsqueda
         }
+        else {
+            navigate('/');
+        }
     }
 
     // Enlaces de navegación
