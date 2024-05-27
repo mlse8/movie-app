@@ -21,11 +21,6 @@ export default function ContainMovies({ type }) {
         handleChange,
     } = useMovieApi(); // Utiliza el customhook para obtener datos de películas y paginación
 
-    // Se ejecuta cuando cambia la ubicación de la ruta
-    useEffect(() => {
-        handleChange(null, 1); // Resetea la página a 1 cada vez que cambia la ubicación
-    }, [location]);
-
     // Se ejecuta cuando cambia el tipo de películas o la página actual
     useEffect(() => {
         // Obtiene las películas populares o los nuevos lanzamientos según el tipo y la página actual
@@ -36,6 +31,11 @@ export default function ContainMovies({ type }) {
         else
             getTopRatedMovies();
     }, [type, page]);
+
+    // Se ejecuta cuando cambia la ubicación de la ruta
+    useEffect(() => {
+        handleChange(null, 1); // Resetea la página a 1 cada vez que cambia la ubicación
+    }, [location]);
 
     let movies = [];
     // Determina qué películas mostrar según el tipo

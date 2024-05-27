@@ -18,7 +18,7 @@ export default function Footer() {
                         color={"white"}
                     >
                         TMDb
-                    </Typography> // Abre el enlace a la pág de la API de forma segura
+                    </Typography> {/* Abre el enlace a la pág de la API de forma segura} */}
                 </Typography>
             </Box>
         </Container>
