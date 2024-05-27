@@ -20,12 +20,12 @@ export default function ContainMovies({ type }) {
     } = useMovieApi();
 
     useEffect(() => {
-        type === "popular" ? getPopularMovies() : getNewMovies();
-    }, [type, page]);
-
-    useEffect(() => {
         handleChange(null, 1);
     }, [location]);
+
+    useEffect(() => {
+        type === "popular" ? getPopularMovies() : getNewMovies();
+    }, [type, page]);
 
     let movies = [];
     type === "popular" ? (movies = popularMovies) : (movies = newMovies);

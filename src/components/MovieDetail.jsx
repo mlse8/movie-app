@@ -82,20 +82,21 @@ export default function MovieDetail({movie, trailer}) {
                         </Box>
                         <Typography variant="body1">{year}</Typography>
                     </Box>
-                    <Button
-                        variant="contained"
-                        startIcon={<PlayCircleIcon />}
-                        sx={{
-                            backgroundColor: "transparent",
-                            boxShadow: "none",
-                            marginRight: { xs: "auto", sm: "0" },
-                            ":hover": { backgroundColor: "rgba(3,3,3,0.6)" }
-                        }}
-                        onClick={handleOpen}
-                    >
-                        Ver trailer
-                    </Button>
-                    {open && <MovieTrailer trailer={trailer} handleClose={handleClose} />}
+                    {trailer.length > 0 && (
+                        <Button
+                            variant="contained"
+                            startIcon={<PlayCircleIcon />}
+                            sx={{
+                                backgroundColor: "transparent",
+                                boxShadow: "none",
+                                marginRight: { xs: "auto", sm: "0" },
+                                ":hover": { backgroundColor: "rgba(3,3,3,0.6)" }
+                            }}
+                            onClick={handleOpen}
+                        >
+                            Ver trailer
+                        </Button>
+                    )}
                 </Box>
                 <Box>
                     <Typography
@@ -147,6 +148,7 @@ export default function MovieDetail({movie, trailer}) {
                     </Box>
                 </Box>
             </Box>
+            {open && <MovieTrailer trailer={trailer} open={open} handleClose={handleClose} />}
         </Box>
     );
 }

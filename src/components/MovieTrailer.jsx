@@ -3,8 +3,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReactPlayer from "react-player";
 
 export default function MovieTrailer({ trailer, handleClose }) {
+    if (!trailer || trailer.length === 0) return null;
     const youtubeUrl = `https://www.youtube.com/watch?v=${trailer[0].key}`;
-    console.log(youtubeUrl);
 
     return (
         <Dialog open={true} fullWidth maxWidth={"md"}>
