@@ -14,21 +14,37 @@ export default function ContainMovies({ type }) {
         getPopularMovies,
         newMovies,
         getNewMovies,
+        topRatedMovies,
+        getTopRatedMovies,
         page,
         totalPages,
         handleChange,
-    } = useMovieApi();
+    } = useMovieApi(); // Utiliza el customhook para obtener datos de películas y paginación
 
+    // Se ejecuta cuando cambia la ubicación de la ruta
     useEffect(() => {
-        handleChange(null, 1);
+        handleChange(null, 1); // Resetea la página a 1 cada vez que cambia la ubicación
     }, [location]);
 
+    // Se ejecuta cuando cambia el tipo de películas o la página actual
     useEffect(() => {
-        type === "popular" ? getPopularMovies() : getNewMovies();
+        // Obtiene las películas populares o los nuevos lanzamientos según el tipo y la página actual
+        if (type === "popular")  
+            getPopularMovies() 
+        else if (type === "new") 
+            getNewMovies();
+        else
+            getTopRatedMovies();
     }, [type, page]);
 
     let movies = [];
-    type === "popular" ? (movies = popularMovies) : (movies = newMovies);
+    // Determina qué películas mostrar según el tipo
+    if (type === "popular")  
+        (movies = popularMovies) 
+    else if (type === "new")
+        (movies = newMovies);
+    else
+        (movies = topRatedMovies);
 
     return (
         <>
@@ -45,6 +61,7 @@ export default function ContainMovies({ type }) {
                     >
                         {type === "popular" && "Películas Populares"}
                         {type === "new" && "Últimos Lanzamientos"}
+                        {type === "top" && "Mejor puntuadas"}
                     </Typography>
                     <MovieCatalog movies={movies} page={page} totalPages={totalPages} handleChange={handleChange} />
                 </Container>

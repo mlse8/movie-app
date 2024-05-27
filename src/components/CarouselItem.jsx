@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+// Renderiza cada item del carrusel principal
 export default function CarouselItem({movie}) {
     const navigate = useNavigate();
     const { id, title, poster_path, backdrop_path, overview } = movie;

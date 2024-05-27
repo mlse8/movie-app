@@ -6,20 +6,24 @@ import { useEffect, useState } from "react";
 import useMovieApi from "../hooks/useMovieApi";
 
 function useQuery() {
+    // Devuelve un objeto URLSearchParams basado en la query de la ubicación actual
     return new URLSearchParams(useLocation().search);
 }
 
 export default function SearchResults() {
-    const query = useQuery().get("query");
-    const { searchResults, searchMovies, loading, page, totalPages, handleChange } = useMovieApi();
-    const [currentQuery, setCurrentQuery] = useState(query);
+    const query = useQuery().get("query"); // Obtiene el valor de la query "query" de la URL
+    const { searchResults, searchMovies, loading, page, totalPages, handleChange } = useMovieApi(); // Obtiene los resultados de la búsqueda de la API y la paginación del custom hook
+    const [currentQuery, setCurrentQuery] = useState(query); // Estado local para almacenar la query actual
 
     useEffect(() => {
+        // Se ejecuta cuando cambia la query o la página
         if (currentQuery !== query) {
+            // Si la query actual es diferente de la nueva query, resetea la página a 1
             handleChange(null, 1);
-            setCurrentQuery(query);
+            setCurrentQuery(query); // Actualiza la query actual
         }
         if (query) {
+            // Si hay una query válida, realiza una nueva búsqueda
             searchMovies(query, page);
         }
     }, [query, page]);

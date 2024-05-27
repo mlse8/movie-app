@@ -1,6 +1,7 @@
 import { Grid, Pagination } from "@mui/material";
 import MovieCard from "../components/MovieCard";
 
+// Renderiza las tarjetas de las películas y la paginación
 export default function MovieCatalog({movies, page, totalPages, handleChange}) {
     return (
         <>

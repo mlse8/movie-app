@@ -16,9 +16,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MovieIcon from "@mui/icons-material/Movie";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import NavListDrawer from "./NavListDrawer";
-import { FavoriteContext } from "../context/FavoriteContext";
+import NavListDrawer from "../NavListDrawer";
+import { FavoriteContext } from "../../context/FavoriteContext";
 
+// Estilos para el componente de búsqueda
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
     display: "flex",
@@ -81,22 +82,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
     const navigate = useNavigate();
-    const [open, setOpen] = useState(false);
-    const { totalFavorites } = useContext(FavoriteContext);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [open, setOpen] = useState(false); // Estado para controlar la apertura del drawer
+    const { totalFavorites } = useContext(FavoriteContext); // Obtiene el total de favoritos del contexto
+    const [searchQuery, setSearchQuery] = useState(""); // Estado para el query de búsqueda
 
+    // Maneja el cambio en el campo de búsqueda
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
         if (e.target.value) {
-            navigate(`/search?query=${e.target.value}`);
+            navigate(`/search?query=${e.target.value}`); // Navega a la página de resultados de búsqueda
         }
     }
 
+    // Enlaces de navegación
     const navLinks = [
-        {
-            title: "Inicio",
-            path: "/",
-        },
         {
             title: "Ultimos lanzamientos",
             path: "/new_movies",
@@ -106,9 +105,13 @@ export default function Header() {
             path: "/popular",
         },
         {
+            title: "Mejor puntuadas",
+            path: "/top_rated",
+        },
+        {
             title: "Favoritos",
             path: "/favorites",
-            badgeContent: totalFavorites(),
+            badgeContent: totalFavorites(), // Muestra el total de favoritos como badge
         },
     ];
 
@@ -119,7 +122,7 @@ export default function Header() {
                     <IconButton
                         color="inherit"
                         size="large"
-                        onClick={() => setOpen(true)}
+                        onClick={() => setOpen(true)} // Abre el drawer
                         sx={{ display: { xs: "flex", sm: "flex", md: "none" } }}
                     >
                         <MenuIcon />

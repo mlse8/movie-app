@@ -3,10 +3,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReactPlayer from "react-player";
 
 export default function MovieTrailer({ trailer, handleClose }) {
+    // Si no hay trailer o si el array de trailers está vacío, no renderizar nada
     if (!trailer || trailer.length === 0) return null;
+    // Construye la URL del video de YouTube usando la clave del primer trailer
     const youtubeUrl = `https://www.youtube.com/watch?v=${trailer[0].key}`;
 
     return (
+        // Componente Dialog para mostrar el trailer en un modal
         <Dialog open={true} fullWidth maxWidth={"md"}>
             <IconButton
                 aria-label="close"

@@ -5,11 +5,11 @@ import MoviePoster from "../components/MoviePoster";
 import Loading from "../components/Loading";
 
 export default function ContainDetailMovie() {
-    const { id } = useParams();
-    const { loading, oneMovie, trailer, getOneMovie } = useMovieApi();
+    const { id } = useParams(); // Obtiene el parámetro de la URL correspondiente al id de la película
+    const { loading, oneMovie, trailer, getOneMovie } = useMovieApi(); // Utiliza el customhook para obtener detalles de una sola película y su tráiler
 
     useEffect(() => {
-        getOneMovie(id);
+        getOneMovie(id); // Obtiene los detalles de la película y su tráiler cuando el componente se monta
     }, []);
 
     return (

@@ -10,13 +10,17 @@ import MovieTrailer from "./MovieTrailer";
 import { FavoriteContext } from "../context/FavoriteContext";
 
 export default function MovieDetail({movie, trailer}) {
+    // Desestructura propiedades del objeto movie
     const { genres, poster_path, release_date, overview, title, runtime, vote_average } = movie;
 
+    // Obtiene el año de la fecha de lanzamiento
     const releaseDate = new Date(release_date);
     const year = releaseDate.getFullYear();
 
+    // Usa el contexto de favoritos
     const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
 
+    // Renderiza la puntuación con estrellas
     const renderStarRating = (rating) => {
         const fullStars = Math.floor(rating / 2);
         const halfStar = rating % 2 !== 0;
@@ -36,10 +40,12 @@ export default function MovieDetail({movie, trailer}) {
         return stars;
     }
 
+    // Controla el modal del trailer
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    // Maneja el clic en el icono de favorito
     const handleFavoriteClick = () => {
         isFavorite(movie.id) ? removeFavorite(movie.id) : addFavorite(movie)
     };

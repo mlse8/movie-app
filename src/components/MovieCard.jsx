@@ -17,14 +17,15 @@ export default function MovieCard({ movie }) {
     const navigate = useNavigate();
     const { id, title, poster_path } = movie;
 
-    const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
+    const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext); // Accede al contexto de favoritos
 
+    // Maneja el click en el icono de favorito
     const handleFavoriteClick = (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // Previene la propagación del evento al Card
         if (isFavorite(movie.id)) {
-            removeFavorite(movie.id);
+            removeFavorite(movie.id); // Si es favorito, lo elimina de favoritos
         } else {
-            addFavorite(movie);
+            addFavorite(movie); // Si no es favorito, lo agrega a favoritos
         }
     };
 

@@ -4,11 +4,12 @@ import { Box, Typography } from "@mui/material";
 import MovieCard from "./MovieCard";
 import { createGlobalStyle } from "styled-components";
 
+// Estilos para cambiar los controles del carrusel
 const GlobalStyles = createGlobalStyle`
     .alice-carousel__prev-btn, .alice-carousel__next-btn {
         position: absolute;
         top: 0;
-        width: 1.7rem;
+        width: 2rem;
         height: 100%;
         background-color: #121212 !important;
         display: flex;
@@ -30,6 +31,7 @@ const GlobalStyles = createGlobalStyle`
     }
 `;
 
+// Renderiza el carrusel adaptable
 export default function MovieList({ title, movies }) {
     return (
         <Box
